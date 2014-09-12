@@ -22,6 +22,9 @@ else
   echo "No deploy-specific environment variables"
 fi
 
+echo "Changing ownership of task directory {{{ taskAppDirectory }}} to {{{ user }}}"
+chown -R {{{ user }}} {{{ taskAppDirectory }}}
+
 cd {{{ taskAppDirectory }}}/
 
 # load artifact's profile.d
