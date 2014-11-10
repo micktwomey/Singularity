@@ -374,44 +374,6 @@ Retrieve the list of logs stored in S3 for a specific deploy.
 #### Overview
 Manages Singularity racks.
 
-#### **GET** `/api/racks/dead`
-
-Retrieve the list of dead racks. A rack is dead if it has zero active slaves.
-
-
-###### Parameters
-- No parameters
-
-###### Response
-[](#)
-
-
-###### Errors
-| Status Code | Reason      | Response Model |
-|-------------|-------------|----------------|
-| - | - | - |
-
-
-- - -
-#### **GET** `/api/racks/decomissioning`
-
-Retrieve the list of decommissioning racks.
-
-
-###### Parameters
-- No parameters
-
-###### Response
-[](#)
-
-
-###### Errors
-| Status Code | Reason      | Response Model |
-|-------------|-------------|----------------|
-| - | - | - |
-
-
-- - -
 #### **GET** `/api/racks/active`
 
 Retrieve the list of active racks. A rack is active if it has one or more active slaves associated with it.
@@ -505,18 +467,88 @@ Decomission a specific active rack.
 
 
 - - -
+#### **GET** `/api/racks/dead`
+
+Retrieve the list of dead racks. A rack is dead if it has zero active slaves.
+
+
+###### Parameters
+- No parameters
+
+###### Response
+[](#)
+
+
+###### Errors
+| Status Code | Reason      | Response Model |
+|-------------|-------------|----------------|
+| - | - | - |
+
+
+- - -
+#### **GET** `/api/racks/decomissioning`
+
+Retrieve the list of decommissioning racks.
+
+
+###### Parameters
+- No parameters
+
+###### Response
+[](#)
+
+
+###### Errors
+| Status Code | Reason      | Response Model |
+|-------------|-------------|----------------|
+| - | - | - |
+
+
+- - -
 <a name="#api-4"></a>
 ### /api/requests
 #### Overview
 Manages Singularity requests.
 
-#### **GET** `/api/requests`
+#### **GET** `/api/requests/request/{requestId}`
 
-Retrieve the list of all requests.
+Retrieve information about a specific request.
 
 
 ###### Parameters
-- No parameters
+**path**
+
+| Parameter | Required | Description | Data Type |
+|-----------|----------|-------------|-----------|
+| requestId | true | Request ID. | string |
+
+###### Response
+[](#)
+
+
+###### Errors
+| Status Code | Reason      | Response Model |
+|-------------|-------------|----------------|
+| - | - | - |
+
+
+- - -
+#### **DELETE** `/api/requests/request/{requestId}`
+
+Delete a specific request.
+
+
+###### Parameters
+**path**
+
+| Parameter | Required | Description | Data Type |
+|-----------|----------|-------------|-----------|
+| requestId | true | The request ID to delete. | string |
+**query**
+
+| Parameter | Required | Description | Data Type |
+|-----------|----------|-------------|-----------|
+| user | false | Username of the person requesting the delete. | <a href="#UNKNOWN[string]">UNKNOWN[string]</a> |
 
 ###### Response
 [](#)
@@ -557,45 +589,13 @@ Create or update a Singularity Request
 
 
 - - -
-#### **GET** `/api/requests/request/{requestId}`
+#### **GET** `/api/requests`
 
-Retrieve information about a specific request.
-
-
-###### Parameters
-**path**
-
-| Parameter | Required | Description | Data Type |
-|-----------|----------|-------------|-----------|
-| requestId | true | Request ID. | string |
-
-###### Response
-[](#)
-
-
-###### Errors
-| Status Code | Reason      | Response Model |
-|-------------|-------------|----------------|
-| - | - | - |
-
-
-- - -
-#### **DELETE** `/api/requests/request/{requestId}`
-
-Delete a specific request.
+Retrieve the list of all requests.
 
 
 ###### Parameters
-**path**
-
-| Parameter | Required | Description | Data Type |
-|-----------|----------|-------------|-----------|
-| requestId | true | The request ID to delete. | string |
-**query**
-
-| Parameter | Required | Description | Data Type |
-|-----------|----------|-------------|-----------|
-| user | false | Username of the person requesting the delete. | <a href="#UNKNOWN[string]">UNKNOWN[string]</a> |
+- No parameters
 
 ###### Response
 [](#)
@@ -1400,6 +1400,25 @@ Retrieve statistics about a specific active task.
 #### Overview
 Misc testing endpoints.
 
+#### **POST** `/api/test/abort`
+
+Abort the Mesos scheduler driver.
+
+
+###### Parameters
+- No parameters
+
+###### Response
+[](#)
+
+
+###### Errors
+| Status Code | Reason      | Response Model |
+|-------------|-------------|----------------|
+| - | - | - |
+
+
+- - -
 #### **POST** `/api/test/stop`
 
 Stop the Mesos scheduler driver.
@@ -1422,25 +1441,6 @@ Stop the Mesos scheduler driver.
 #### **POST** `/api/test/start`
 
 Start the Mesos scheduler driver.
-
-
-###### Parameters
-- No parameters
-
-###### Response
-[](#)
-
-
-###### Errors
-| Status Code | Reason      | Response Model |
-|-------------|-------------|----------------|
-| - | - | - |
-
-
-- - -
-#### **POST** `/api/test/abort`
-
-Abort the Mesos scheduler driver.
 
 
 ###### Parameters
