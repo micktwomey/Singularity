@@ -510,45 +510,13 @@ Retrieve the list of decommissioning racks.
 #### Overview
 Manages Singularity requests.
 
-#### **GET** `/api/requests/request/{requestId}`
+#### **GET** `/api/requests`
 
-Retrieve information about a specific request.
-
-
-###### Parameters
-**path**
-
-| Parameter | Required | Description | Data Type |
-|-----------|----------|-------------|-----------|
-| requestId | true | Request ID. | string |
-
-###### Response
-[](#)
-
-
-###### Errors
-| Status Code | Reason      | Response Model |
-|-------------|-------------|----------------|
-| - | - | - |
-
-
-- - -
-#### **DELETE** `/api/requests/request/{requestId}`
-
-Delete a specific request.
+Retrieve the list of all requests.
 
 
 ###### Parameters
-**path**
-
-| Parameter | Required | Description | Data Type |
-|-----------|----------|-------------|-----------|
-| requestId | true | The request ID to delete. | string |
-**query**
-
-| Parameter | Required | Description | Data Type |
-|-----------|----------|-------------|-----------|
-| user | false | Username of the person requesting the delete. | <a href="#UNKNOWN[string]">UNKNOWN[string]</a> |
+- No parameters
 
 ###### Response
 [](#)
@@ -589,13 +557,45 @@ Create or update a Singularity Request
 
 
 - - -
-#### **GET** `/api/requests`
+#### **GET** `/api/requests/request/{requestId}`
 
-Retrieve the list of all requests.
+Retrieve information about a specific request.
 
 
 ###### Parameters
-- No parameters
+**path**
+
+| Parameter | Required | Description | Data Type |
+|-----------|----------|-------------|-----------|
+| requestId | true | Request ID. | string |
+
+###### Response
+[](#)
+
+
+###### Errors
+| Status Code | Reason      | Response Model |
+|-------------|-------------|----------------|
+| - | - | - |
+
+
+- - -
+#### **DELETE** `/api/requests/request/{requestId}`
+
+Delete a specific request.
+
+
+###### Parameters
+**path**
+
+| Parameter | Required | Description | Data Type |
+|-----------|----------|-------------|-----------|
+| requestId | true | The request ID to delete. | string |
+**query**
+
+| Parameter | Required | Description | Data Type |
+|-----------|----------|-------------|-----------|
+| user | false | Username of the person requesting the delete. | <a href="#UNKNOWN[string]">UNKNOWN[string]</a> |
 
 ###### Response
 [](#)
@@ -1400,25 +1400,6 @@ Retrieve statistics about a specific active task.
 #### Overview
 Misc testing endpoints.
 
-#### **POST** `/api/test/abort`
-
-Abort the Mesos scheduler driver.
-
-
-###### Parameters
-- No parameters
-
-###### Response
-[](#)
-
-
-###### Errors
-| Status Code | Reason      | Response Model |
-|-------------|-------------|----------------|
-| - | - | - |
-
-
-- - -
 #### **POST** `/api/test/stop`
 
 Stop the Mesos scheduler driver.
@@ -1441,6 +1422,25 @@ Stop the Mesos scheduler driver.
 #### **POST** `/api/test/start`
 
 Start the Mesos scheduler driver.
+
+
+###### Parameters
+- No parameters
+
+###### Response
+[](#)
+
+
+###### Errors
+| Status Code | Reason      | Response Model |
+|-------------|-------------|----------------|
+| - | - | - |
+
+
+- - -
+#### **POST** `/api/test/abort`
+
+Abort the Mesos scheduler driver.
 
 
 ###### Parameters
@@ -1736,8 +1736,7 @@ Retrieve a list of queued task updates for a specific webhook.
 
 | type | required | description |
 |------|----------|-------------|
-| <a href="#WebhookType">WebhookType</a> | optional | Webhook type (TASK, REQUEST, DEPLOY). Allowable
-        values:TASK, REQUEST, DEPLOY |
+| <a href="#WebhookType">WebhookType</a> | optional | Webhook type. Allowable values:TASK, REQUEST, DEPLOY |
 | string | optional | URI to POST to. |
 | <a href="#com.google.common.base.Optional&lt;java.lang.String&gt;">com.google.common.base.Optional&lt;java.lang.String&gt;</a> | optional | User that created webhook. |
 | long | optional | - |

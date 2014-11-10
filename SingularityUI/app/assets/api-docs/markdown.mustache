@@ -104,8 +104,7 @@ Enums:
 | type | required | description |
 |------|----------|-------------|
 {{#items}}
-| {{#linkType}}<a href="#{{linkType}}">{{type}}</a>{{/linkType}}{{^linkType}}{{type}}{{/linkType}} | {{#required}}required{{/required}}{{^required}}optional{{/required}} | {{#description}}{{{description}}}{{/description}}{{^description}}-{{/description}}{{#allowableValue}} Allowable
-        values:{{.}}{{/allowableValue}} |
+| {{#linkType}}<a href="#{{linkType}}">{{type}}</a>{{/linkType}}{{^linkType}}{{type}}{{/linkType}} | {{#required}}required{{/required}}{{^required}}optional{{/required}} | {{#description}}{{{description}}}{{/description}}{{^description}}-{{/description}}{{#allowableValue}} Allowable values: {{.}}{{/allowableValue}} |
 {{/items}}
 
 {{/dataTypes}}
