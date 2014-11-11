@@ -25,6 +25,7 @@ Models:
 - [`SingularityDeployRequest`](#singularitydeployrequest)
 - [`SingularityDockerInfo`](#singularitydockerinfo)
 - [`SingularityDockerPortMapping`](#singularitydockerportmapping)
+- [`SingularityPauseRequest`](#singularitypauserequest)
 - [`SingularityRequest`](#singularityrequest)
 - [`SingularityRequestInstances`](#singularityrequestinstances)
 - [`SingularityVolume`](#singularityvolume)
@@ -82,7 +83,7 @@ Delete a pending deployment from a request.
 
 | Parameter | Required | Description | Data Type |
 |-----------|----------|-------------|-----------|
-| user | false | The user which executes the delete request. | <a href="#UNKNOWN[string]">UNKNOWN[string]</a> |
+| user | false | The user which executes the delete request. | string |
 
 ###### Response
 [](#)
@@ -477,7 +478,7 @@ Decomission a specific active rack.
 
 | Parameter | Required | Description | Data Type |
 |-----------|----------|-------------|-----------|
-| user | false | Username of person requestin the decommisioning. | <a href="#UNKNOWN[string]">UNKNOWN[string]</a> |
+| user | false | Username of person requestin the decommisioning. | string |
 
 ###### Response
 [](#)
@@ -518,22 +519,13 @@ Undo the decomission operation on a specific decommissioning rack.
 #### Overview
 Manages Singularity requests.
 
-#### **POST** `/api/requests`
+#### **GET** `/api/requests`
 
-Create or update a Singularity Request
+Retrieve the list of all requests.
 
 
 ###### Parameters
-**query**
-
-| Parameter | Required | Description | Data Type |
-|-----------|----------|-------------|-----------|
-| user | false | Username of the person requesting to create or update. | <a href="#UNKNOWN[string]">UNKNOWN[string]</a> |
-**body**
-
-| Parameter | Required | Description | Data Type |
-|-----------|----------|-------------|-----------|
-| body | false | The Singularity request to create or update. | <a href="#SingularityRequest">SingularityRequest</a> |
+- No parameters
 
 ###### Response
 [](#)
@@ -546,13 +538,22 @@ Create or update a Singularity Request
 
 
 - - -
-#### **GET** `/api/requests`
+#### **POST** `/api/requests`
 
-Retrieve the list of all requests.
+Create or update a Singularity Request
 
 
 ###### Parameters
-- No parameters
+**query**
+
+| Parameter | Required | Description | Data Type |
+|-----------|----------|-------------|-----------|
+| user | false | Username of the person requesting to create or update. | string |
+**body**
+
+| Parameter | Required | Description | Data Type |
+|-----------|----------|-------------|-----------|
+| body | false | The Singularity request to create or update. | <a href="#SingularityRequest">SingularityRequest</a> |
 
 ###### Response
 [](#)
@@ -717,7 +718,7 @@ Delete a specific request.
 
 | Parameter | Required | Description | Data Type |
 |-----------|----------|-------------|-----------|
-| user | false | Username of the person requesting the delete. | <a href="#UNKNOWN[string]">UNKNOWN[string]</a> |
+| user | false | Username of the person requesting the delete. | string |
 
 ###### Response
 [](#)
@@ -745,7 +746,7 @@ Bounce a specific Singularity request. A bounce launches replacement task(s), an
 
 | Parameter | Required | Description | Data Type |
 |-----------|----------|-------------|-----------|
-| user | false | Username of the person requesting the bounce | <a href="#UNKNOWN[string]">UNKNOWN[string]</a> |
+| user | false | Username of the person requesting the bounce | string |
 
 ###### Response
 [](#)
@@ -773,7 +774,7 @@ Scale the number of instances for a specific request.
 
 | Parameter | Required | Description | Data Type |
 |-----------|----------|-------------|-----------|
-| user | false | Username of the person requesting the scale. | <a href="#UNKNOWN[string]">UNKNOWN[string]</a> |
+| user | false | Username of the person requesting the scale. | string |
 **body**
 
 | Parameter | Required | Description | Data Type |
@@ -806,12 +807,12 @@ Pause a Singularity request.
 
 | Parameter | Required | Description | Data Type |
 |-----------|----------|-------------|-----------|
-| user | false | Username of the person requesting the pause. | <a href="#UNKNOWN[string]">UNKNOWN[string]</a> |
+| user | false | Username of the person requesting the pause. | string |
 **body**
 
 | Parameter | Required | Description | Data Type |
 |-----------|----------|-------------|-----------|
-| body | false | Additional pause options. | <a href="#UNKNOWN[SingularityPauseRequest]">UNKNOWN[SingularityPauseRequest]</a> |
+| body | false | Additional pause options. | <a href="#SingularityPauseRequest">SingularityPauseRequest</a> |
 
 ###### Response
 [](#)
@@ -839,7 +840,7 @@ Schedule a Singularity request for immediate execution.
 
 | Parameter | Required | Description | Data Type |
 |-----------|----------|-------------|-----------|
-| user | false | Username of the person requesting the execution | <a href="#UNKNOWN[string]">UNKNOWN[string]</a> |
+| user | false | Username of the person requesting the execution | string |
 **body**
 
 | Parameter | Required | Description | Data Type |
@@ -872,7 +873,7 @@ Unpause a Singularity request.
 
 | Parameter | Required | Description | Data Type |
 |-----------|----------|-------------|-----------|
-| user | false | Username of the person requesting the unpause | <a href="#UNKNOWN[string]">UNKNOWN[string]</a> |
+| user | false | Username of the person requesting the unpause | string |
 
 ###### Response
 [](#)
@@ -934,9 +935,9 @@ Retrieve part of the contents of a file in a specific task&#39;s sandbox.
 | Parameter | Required | Description | Data Type |
 |-----------|----------|-------------|-----------|
 | path | false | The path to the file to be read | string |
-| grep | false | Optional string to grep for | <a href="#UNKNOWN[string]">UNKNOWN[string]</a> |
-| offset | false | Byte offset to start reading from | <a href="#UNKNOWN[long]">UNKNOWN[long]</a> |
-| length | false | Maximum number of bytes to read | <a href="#UNKNOWN[long]">UNKNOWN[long]</a> |
+| grep | false | Optional string to grep for | string |
+| offset | false | Byte offset to start reading from | long |
+| length | false | Maximum number of bytes to read | long |
 
 ###### Response
 [](#)
@@ -1049,7 +1050,7 @@ Decommission a specific slave.
 
 | Parameter | Required | Description | Data Type |
 |-----------|----------|-------------|-----------|
-| user | false |  | <a href="#UNKNOWN[string]">UNKNOWN[string]</a> |
+| user | false |  | string |
 
 ###### Response
 [](#)
@@ -1367,7 +1368,7 @@ Kill a specific active task.
 
 | Parameter | Required | Description | Data Type |
 |-----------|----------|-------------|-----------|
-| user | false |  | <a href="#UNKNOWN[string]">UNKNOWN[string]</a> |
+| user | false |  | string |
 
 ###### Response
 [](#)
@@ -1795,6 +1796,15 @@ Delete a specific webhook.
 | containerPortType | <a href="#SingularityPortMappingType">SingularityPortMappingType</a> | optional |  Allowable values: LITERAL, FROM_OFFER |
 | protocol | string | optional |  |
 | hostPortType | <a href="#SingularityPortMappingType">SingularityPortMappingType</a> | optional |  Allowable values: LITERAL, FROM_OFFER |
+
+
+<a name="#model-SingularityPauseRequest"></a>
+## SingularityPauseRequest
+
+| name | type | required | description |
+|------|------|----------|-------------|
+| user | string | optional |  |
+| killTasks | boolean | optional |  |
 
 
 <a name="#model-SingularityRequest"></a>
