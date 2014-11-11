@@ -16,10 +16,18 @@ Endpoints:
 - [`/api/webhooks`](#apiwebhooks) - Manages Singularity webhooks.
 
 Models:
+- [`EmbeddedArtifact`](#embeddedartifact)
+- [`ExecutorData`](#executordata)
+- [`ExternalArtifact`](#externalartifact)
+- [`S3Artifact`](#s3artifact)
+- [`SingularityContainerInfo`](#singularitycontainerinfo)
 - [`SingularityDeploy`](#singularitydeploy)
 - [`SingularityDeployRequest`](#singularitydeployrequest)
+- [`SingularityDockerInfo`](#singularitydockerinfo)
+- [`SingularityDockerPortMapping`](#singularitydockerportmapping)
 - [`SingularityRequest`](#singularityrequest)
 - [`SingularityRequestInstances`](#singularityrequestinstances)
+- [`SingularityVolume`](#singularityvolume)
 - [`SingularityWebhook`](#singularitywebhook)
 
 Enums:
@@ -1661,34 +1669,99 @@ Delete a specific webhook.
 
 ## Data Types
 
+<a name="#model-EmbeddedArtifact"></a>
+## EmbeddedArtifact
+
+| type | required | description |
+|------|----------|-------------|
+| string | optional | - |
+| string | optional | - |
+| string | optional | - |
+| <a href="#byte">Array[byte]</a> | optional | - |
+
+
+<a name="#model-ExecutorData"></a>
+## ExecutorData
+
+| type | required | description |
+|------|----------|-------------|
+| <a href="#Map[string,string]">Map[string,string]</a> | optional | - |
+| Array[int] | optional | - |
+| <a href="#S3Artifact">Array[S3Artifact]</a> | optional | - |
+| <a href="#EmbeddedArtifact">Array[EmbeddedArtifact]</a> | optional | - |
+| string | optional | - |
+| <a href="#ExternalArtifact">Array[ExternalArtifact]</a> | optional | - |
+| string | optional | - |
+| Array[string] | optional | - |
+| string | optional | - |
+| long | optional | - |
+| int | optional | - |
+| string | optional | - |
+
+
+<a name="#model-ExternalArtifact"></a>
+## ExternalArtifact
+
+| type | required | description |
+|------|----------|-------------|
+| string | optional | - |
+| string | optional | - |
+| string | optional | - |
+| long | optional | - |
+| string | optional | - |
+
+
+<a name="#model-S3Artifact"></a>
+## S3Artifact
+
+| type | required | description |
+|------|----------|-------------|
+| string | optional | - |
+| string | optional | - |
+| string | optional | - |
+| long | optional | - |
+| string | optional | - |
+| string | optional | - |
+
+
+<a name="#model-SingularityContainerInfo"></a>
+## SingularityContainerInfo
+
+| type | required | description |
+|------|----------|-------------|
+| <a href="#Type">Type</a> | optional | - Allowable values: DOCKER |
+| <a href="#SingularityVolume">Array[SingularityVolume]</a> | optional | - |
+| <a href="#SingularityDockerInfo">SingularityDockerInfo</a> | optional | - |
+
+
 <a name="#model-SingularityDeploy"></a>
 ## SingularityDeploy
 
 | type | required | description |
 |------|----------|-------------|
-| <a href="#com.google.common.base.Optional&lt;java.lang.String&gt;">com.google.common.base.Optional&lt;java.lang.String&gt;</a> | optional | Custom Mesos executor id. |
+| string | optional | Custom Mesos executor id. |
 | <a href="#com.hubspot.mesos.Resources">com.hubspot.mesos.Resources</a> | optional | Resources required for this deploy. |
-| <a href="#com.google.common.base.Optional&lt;java.util.List&lt;java.lang.String&gt;&gt;">com.google.common.base.Optional&lt;java.util.List&lt;java.lang.String&gt;&gt;</a> | optional | List of URIs to download before executing the deploy command. |
+| Array[string] | optional | List of URIs to download before executing the deploy command. |
 | <a href="#SingularityContainerInfo">SingularityContainerInfo</a> | optional | Container information for deployment into a container. |
-| <a href="#com.google.common.base.Optional&lt;java.util.List&lt;java.lang.String&gt;&gt;">com.google.common.base.Optional&lt;java.util.List&lt;java.lang.String&gt;&gt;</a> | optional | Command arguments. |
-| <a href="#com.google.common.base.Optional&lt;java.lang.String&gt;">com.google.common.base.Optional&lt;java.lang.String&gt;</a> | optional | The base path for the API exposed by the deploy. Used in conjunction with the Load balancer API. |
-| <a href="#com.google.common.base.Optional&lt;java.util.Map&lt;java.lang.String, java.lang.String&gt;&gt;">com.google.common.base.Optional&lt;java.util.Map&lt;java.lang.String, java.lang.String&gt;&gt;</a> | optional | Map of metadata key/value pairs associated with the deployment. |
-| <a href="#com.google.common.base.Optional&lt;java.lang.String&gt;">com.google.common.base.Optional&lt;java.lang.String&gt;</a> | optional | Custom Mesos executor source. |
-| <a href="#com.google.common.base.Optional&lt;java.lang.Long&gt;">com.google.common.base.Optional&lt;java.lang.Long&gt;</a> | optional | Health check timeout in seconds. |
-| <a href="#com.google.common.base.Optional&lt;java.lang.String&gt;">com.google.common.base.Optional&lt;java.lang.String&gt;</a> | optional | Deployment Healthcheck URI. |
+| Array[string] | optional | Command arguments. |
+| string | optional | The base path for the API exposed by the deploy. Used in conjunction with the Load balancer API. |
+| <a href="#Map[string,string]">Map[string,string]</a> | optional | Map of metadata key/value pairs associated with the deployment. |
+| string | optional | Custom Mesos executor source. |
+| long | optional | Health check timeout in seconds. |
+| string | optional | Deployment Healthcheck URI. |
 | string | required | Singularity Request Id which is associated with this deploy. |
-| <a href="#com.google.common.base.Optional&lt;java.util.List&lt;java.lang.String&gt;&gt;">com.google.common.base.Optional&lt;java.util.List&lt;java.lang.String&gt;&gt;</a> | optional | List of load balancer groups associated with this deployment. |
-| <a href="#com.google.common.base.Optional&lt;java.lang.Boolean&gt;">com.google.common.base.Optional&lt;java.lang.Boolean&gt;</a> | optional | Allows skipping of health checks when deploying. |
-| <a href="#com.google.common.base.Optional&lt;java.lang.Long&gt;">com.google.common.base.Optional&lt;java.lang.Long&gt;</a> | optional | Health check interval in seconds. |
-| <a href="#com.google.common.base.Optional&lt;com.hubspot.deploy.ExecutorData&gt;">com.google.common.base.Optional&lt;com.hubspot.deploy.ExecutorData&gt;</a> | optional | Executor specific information |
-| <a href="#com.google.common.base.Optional&lt;java.lang.String&gt;">com.google.common.base.Optional&lt;java.lang.String&gt;</a> | optional | Command to execute for this deployment. |
-| <a href="#com.google.common.base.Optional&lt;java.lang.Long&gt;">com.google.common.base.Optional&lt;java.lang.Long&gt;</a> | optional | Number of seconds that a service must be healthy to consider the deployment to be successful. |
-| <a href="#com.google.common.base.Optional&lt;java.lang.Long&gt;">com.google.common.base.Optional&lt;java.lang.Long&gt;</a> | optional | Deploy timestamp. |
-| <a href="#com.google.common.base.Optional&lt;java.util.Map&lt;java.lang.String, java.lang.Object&gt;&gt;">com.google.common.base.Optional&lt;java.util.Map&lt;java.lang.String, java.lang.Object&gt;&gt;</a> | optional | Map (Key/Value) of options for the load balancer. |
+| Array[string] | optional | List of load balancer groups associated with this deployment. |
+| boolean | optional | Allows skipping of health checks when deploying. |
+| long | optional | Health check interval in seconds. |
+| <a href="#ExecutorData">ExecutorData</a> | optional | Executor specific information |
+| string | optional | Command to execute for this deployment. |
+| long | optional | Number of seconds that a service must be healthy to consider the deployment to be successful. |
+| long | optional | Deploy timestamp. |
+| <a href="#Map[string,Object]">Map[string,Object]</a> | optional | Map (Key/Value) of options for the load balancer. |
 | string | optional | Custom Mesos executor |
-| <a href="#com.google.common.base.Optional&lt;java.util.Map&lt;java.lang.String, java.lang.String&gt;&gt;">com.google.common.base.Optional&lt;java.util.Map&lt;java.lang.String, java.lang.String&gt;&gt;</a> | optional | Map of environment variable definitions. |
-| <a href="#com.google.common.base.Optional&lt;java.lang.String&gt;">com.google.common.base.Optional&lt;java.lang.String&gt;</a> | optional | Deploy version |
-| <a href="#com.google.common.base.Optional&lt;java.lang.Long&gt;">com.google.common.base.Optional&lt;java.lang.Long&gt;</a> | optional | Number of seconds that singularity waits for this service to become healthy. |
+| <a href="#Map[string,string]">Map[string,string]</a> | optional | Map of environment variable definitions. |
+| string | optional | Deploy version |
+| long | optional | Number of seconds that singularity waits for this service to become healthy. |
 | string | required | Singularity deploy id. |
 
 
@@ -1697,9 +1770,31 @@ Delete a specific webhook.
 
 | type | required | description |
 |------|----------|-------------|
-| <a href="#com.google.common.base.Optional&lt;java.lang.Boolean&gt;">com.google.common.base.Optional&lt;java.lang.Boolean&gt;</a> | optional | If deploy is successful, also unpause the request. |
+| boolean | optional | If deploy is successful, also unpause the request. |
 | <a href="#SingularityDeploy">SingularityDeploy</a> | required | The Singularity deploy object |
-| <a href="#com.google.common.base.Optional&lt;java.lang.String&gt;">com.google.common.base.Optional&lt;java.lang.String&gt;</a> | optional | User owning this deploy. |
+| string | optional | User owning this deploy. |
+
+
+<a name="#model-SingularityDockerInfo"></a>
+## SingularityDockerInfo
+
+| type | required | description |
+|------|----------|-------------|
+| <a href="#Network">Network</a> | optional | - |
+| <a href="#SingularityDockerPortMapping">Array[SingularityDockerPortMapping]</a> | optional | - |
+| string | optional | - |
+
+
+<a name="#model-SingularityDockerPortMapping"></a>
+## SingularityDockerPortMapping
+
+| type | required | description |
+|------|----------|-------------|
+| int | optional | - |
+| int | optional | - |
+| <a href="#SingularityPortMappingType">SingularityPortMappingType</a> | optional | - Allowable values: LITERAL, FROM_OFFER |
+| string | optional | - |
+| <a href="#SingularityPortMappingType">SingularityPortMappingType</a> | optional | - Allowable values: LITERAL, FROM_OFFER |
 
 
 <a name="#model-SingularityRequest"></a>
@@ -1707,18 +1802,18 @@ Delete a specific webhook.
 
 | type | required | description |
 |------|----------|-------------|
-| <a href="#com.google.common.base.Optional&lt;java.lang.String&gt;">com.google.common.base.Optional&lt;java.lang.String&gt;</a> | optional | - |
-| <a href="#com.google.common.base.Optional&lt;java.util.List&lt;java.lang.String&gt;&gt;">com.google.common.base.Optional&lt;java.util.List&lt;java.lang.String&gt;&gt;</a> | optional | - |
-| <a href="#com.google.common.base.Optional&lt;java.lang.Boolean&gt;">com.google.common.base.Optional&lt;java.lang.Boolean&gt;</a> | optional | - |
-| <a href="#com.google.common.base.Optional&lt;com.hubspot.singularity.SlavePlacement&gt;">com.google.common.base.Optional&lt;com.hubspot.singularity.SlavePlacement&gt;</a> | optional | - |
-| <a href="#com.google.common.base.Optional&lt;java.lang.Boolean&gt;">com.google.common.base.Optional&lt;java.lang.Boolean&gt;</a> | optional | - |
-| <a href="#com.google.common.base.Optional&lt;java.util.List&lt;java.lang.String&gt;&gt;">com.google.common.base.Optional&lt;java.util.List&lt;java.lang.String&gt;&gt;</a> | optional | - |
-| <a href="#com.google.common.base.Optional&lt;java.lang.String&gt;">com.google.common.base.Optional&lt;java.lang.String&gt;</a> | optional | - |
-| <a href="#com.google.common.base.Optional&lt;java.lang.Integer&gt;">com.google.common.base.Optional&lt;java.lang.Integer&gt;</a> | optional | - |
-| <a href="#com.google.common.base.Optional&lt;java.lang.Boolean&gt;">com.google.common.base.Optional&lt;java.lang.Boolean&gt;</a> | optional | - |
-| <a href="#com.google.common.base.Optional&lt;java.lang.Long&gt;">com.google.common.base.Optional&lt;java.lang.Long&gt;</a> | optional | - |
-| <a href="#com.google.common.base.Optional&lt;java.lang.Integer&gt;">com.google.common.base.Optional&lt;java.lang.Integer&gt;</a> | optional | - |
-| <a href="#com.google.common.base.Optional&lt;com.hubspot.singularity.ScheduleType&gt;">com.google.common.base.Optional&lt;com.hubspot.singularity.ScheduleType&gt;</a> | optional | - |
+| string | optional | - |
+| Array[string] | optional | - |
+| boolean | optional | - |
+| <a href="#SlavePlacement">SlavePlacement</a> | optional | - |
+| boolean | optional | - |
+| Array[string] | optional | - |
+| string | optional | - |
+| int | optional | - |
+| boolean | optional | - |
+| long | optional | - |
+| int | optional | - |
+| <a href="#ScheduleType">ScheduleType</a> | optional | - |
 | string | optional | - |
 
 
@@ -1727,8 +1822,18 @@ Delete a specific webhook.
 
 | type | required | description |
 |------|----------|-------------|
-| <a href="#com.google.common.base.Optional&lt;java.lang.Integer&gt;">com.google.common.base.Optional&lt;java.lang.Integer&gt;</a> | optional | - |
+| int | optional | - |
 | string | optional | - |
+
+
+<a name="#model-SingularityVolume"></a>
+## SingularityVolume
+
+| type | required | description |
+|------|----------|-------------|
+| string | optional | - |
+| string | optional | - |
+| <a href="#Mode">Mode</a> | optional | - Allowable values: RW, RO |
 
 
 <a name="#model-SingularityWebhook"></a>
@@ -1738,7 +1843,7 @@ Delete a specific webhook.
 |------|----------|-------------|
 | <a href="#WebhookType">WebhookType</a> | optional | Webhook type. Allowable values: TASK, REQUEST, DEPLOY |
 | string | optional | URI to POST to. |
-| <a href="#com.google.common.base.Optional&lt;java.lang.String&gt;">com.google.common.base.Optional&lt;java.lang.String&gt;</a> | optional | User that created webhook. |
+| string | optional | User that created webhook. |
 | long | optional | - |
 | string | optional | Unique ID for webhook. |
 
