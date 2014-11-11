@@ -518,25 +518,6 @@ Undo the decomission operation on a specific decommissioning rack.
 #### Overview
 Manages Singularity requests.
 
-#### **GET** `/api/requests`
-
-Retrieve the list of all requests.
-
-
-###### Parameters
-- No parameters
-
-###### Response
-[](#)
-
-
-###### Errors
-| Status Code | Reason      | Response Model |
-|-------------|-------------|----------------|
-| - | - | - |
-
-
-- - -
 #### **POST** `/api/requests`
 
 Create or update a Singularity Request
@@ -553,6 +534,25 @@ Create or update a Singularity Request
 | Parameter | Required | Description | Data Type |
 |-----------|----------|-------------|-----------|
 | body | false | The Singularity request to create or update. | <a href="#SingularityRequest">SingularityRequest</a> |
+
+###### Response
+[](#)
+
+
+###### Errors
+| Status Code | Reason      | Response Model |
+|-------------|-------------|----------------|
+| - | - | - |
+
+
+- - -
+#### **GET** `/api/requests`
+
+Retrieve the list of all requests.
+
+
+###### Parameters
+- No parameters
 
 ###### Response
 [](#)
@@ -1672,179 +1672,179 @@ Delete a specific webhook.
 <a name="#model-EmbeddedArtifact"></a>
 ## EmbeddedArtifact
 
-| type | required | description |
-|------|----------|-------------|
-| string | optional | - |
-| string | optional | - |
-| string | optional | - |
-| <a href="#byte">Array[byte]</a> | optional | - |
+| name | type | required | description |
+|------|------|----------|-------------|
+| md5sum | string | optional | - |
+| filename | string | optional | - |
+| name | string | optional | - |
+| content | <a href="#byte">Array[byte]</a> | optional | - |
 
 
 <a name="#model-ExecutorData"></a>
 ## ExecutorData
 
-| type | required | description |
-|------|----------|-------------|
-| <a href="#Map[string,string]">Map[string,string]</a> | optional | - |
-| Array[int] | optional | - |
-| <a href="#S3Artifact">Array[S3Artifact]</a> | optional | - |
-| <a href="#EmbeddedArtifact">Array[EmbeddedArtifact]</a> | optional | - |
-| string | optional | - |
-| <a href="#ExternalArtifact">Array[ExternalArtifact]</a> | optional | - |
-| string | optional | - |
-| Array[string] | optional | - |
-| string | optional | - |
-| long | optional | - |
-| int | optional | - |
-| string | optional | - |
+| name | type | required | description |
+|------|------|----------|-------------|
+| loggingExtraFields | <a href="#Map[string,string]">Map[string,string]</a> | optional | - |
+| successfulExitCodes | Array[int] | optional | - |
+| s3Artifacts | <a href="#S3Artifact">Array[S3Artifact]</a> | optional | - |
+| embeddedArtifacts | <a href="#EmbeddedArtifact">Array[EmbeddedArtifact]</a> | optional | - |
+| runningSentinel | string | optional | - |
+| externalArtifacts | <a href="#ExternalArtifact">Array[ExternalArtifact]</a> | optional | - |
+| user | string | optional | - |
+| extraCmdLineArgs | Array[string] | optional | - |
+| loggingTag | string | optional | - |
+| sigKillProcessesAfterMillis | long | optional | - |
+| maxTaskThreads | int | optional | - |
+| cmd | string | optional | - |
 
 
 <a name="#model-ExternalArtifact"></a>
 ## ExternalArtifact
 
-| type | required | description |
-|------|----------|-------------|
-| string | optional | - |
-| string | optional | - |
-| string | optional | - |
-| long | optional | - |
-| string | optional | - |
+| name | type | required | description |
+|------|------|----------|-------------|
+| md5sum | string | optional | - |
+| url | string | optional | - |
+| filename | string | optional | - |
+| filesize | long | optional | - |
+| name | string | optional | - |
 
 
 <a name="#model-S3Artifact"></a>
 ## S3Artifact
 
-| type | required | description |
-|------|----------|-------------|
-| string | optional | - |
-| string | optional | - |
-| string | optional | - |
-| long | optional | - |
-| string | optional | - |
-| string | optional | - |
+| name | type | required | description |
+|------|------|----------|-------------|
+| s3Bucket | string | optional | - |
+| md5sum | string | optional | - |
+| filename | string | optional | - |
+| filesize | long | optional | - |
+| s3ObjectKey | string | optional | - |
+| name | string | optional | - |
 
 
 <a name="#model-SingularityContainerInfo"></a>
 ## SingularityContainerInfo
 
-| type | required | description |
-|------|----------|-------------|
-| <a href="#Type">Type</a> | optional | - Allowable values: DOCKER |
-| <a href="#SingularityVolume">Array[SingularityVolume]</a> | optional | - |
-| <a href="#SingularityDockerInfo">SingularityDockerInfo</a> | optional | - |
+| name | type | required | description |
+|------|------|----------|-------------|
+| type | <a href="#Type">Type</a> | optional | - Allowable values: DOCKER |
+| volumes | <a href="#SingularityVolume">Array[SingularityVolume]</a> | optional | - |
+| docker | <a href="#SingularityDockerInfo">SingularityDockerInfo</a> | optional | - |
 
 
 <a name="#model-SingularityDeploy"></a>
 ## SingularityDeploy
 
-| type | required | description |
-|------|----------|-------------|
-| string | optional | Custom Mesos executor id. |
-| <a href="#com.hubspot.mesos.Resources">com.hubspot.mesos.Resources</a> | optional | Resources required for this deploy. |
-| Array[string] | optional | List of URIs to download before executing the deploy command. |
-| <a href="#SingularityContainerInfo">SingularityContainerInfo</a> | optional | Container information for deployment into a container. |
-| Array[string] | optional | Command arguments. |
-| string | optional | The base path for the API exposed by the deploy. Used in conjunction with the Load balancer API. |
-| <a href="#Map[string,string]">Map[string,string]</a> | optional | Map of metadata key/value pairs associated with the deployment. |
-| string | optional | Custom Mesos executor source. |
-| long | optional | Health check timeout in seconds. |
-| string | optional | Deployment Healthcheck URI. |
-| string | required | Singularity Request Id which is associated with this deploy. |
-| Array[string] | optional | List of load balancer groups associated with this deployment. |
-| boolean | optional | Allows skipping of health checks when deploying. |
-| long | optional | Health check interval in seconds. |
-| <a href="#ExecutorData">ExecutorData</a> | optional | Executor specific information |
-| string | optional | Command to execute for this deployment. |
-| long | optional | Number of seconds that a service must be healthy to consider the deployment to be successful. |
-| long | optional | Deploy timestamp. |
-| <a href="#Map[string,Object]">Map[string,Object]</a> | optional | Map (Key/Value) of options for the load balancer. |
-| string | optional | Custom Mesos executor |
-| <a href="#Map[string,string]">Map[string,string]</a> | optional | Map of environment variable definitions. |
-| string | optional | Deploy version |
-| long | optional | Number of seconds that singularity waits for this service to become healthy. |
-| string | required | Singularity deploy id. |
+| name | type | required | description |
+|------|------|----------|-------------|
+| customExecutorId | string | optional | Custom Mesos executor id. |
+| resources | <a href="#com.hubspot.mesos.Resources">com.hubspot.mesos.Resources</a> | optional | Resources required for this deploy. |
+| uris | Array[string] | optional | List of URIs to download before executing the deploy command. |
+| containerInfo | <a href="#SingularityContainerInfo">SingularityContainerInfo</a> | optional | Container information for deployment into a container. |
+| arguments | Array[string] | optional | Command arguments. |
+| serviceBasePath | string | optional | The base path for the API exposed by the deploy. Used in conjunction with the Load balancer API. |
+| metadata | <a href="#Map[string,string]">Map[string,string]</a> | optional | Map of metadata key/value pairs associated with the deployment. |
+| customExecutorSource | string | optional | Custom Mesos executor source. |
+| healthcheckTimeoutSeconds | long | optional | Health check timeout in seconds. |
+| healthcheckUri | string | optional | Deployment Healthcheck URI. |
+| requestId | string | required | Singularity Request Id which is associated with this deploy. |
+| loadBalancerGroups | Array[string] | optional | List of load balancer groups associated with this deployment. |
+| skipHealthchecksOnDeploy | boolean | optional | Allows skipping of health checks when deploying. |
+| healthcheckIntervalSeconds | long | optional | Health check interval in seconds. |
+| executorData | <a href="#ExecutorData">ExecutorData</a> | optional | Executor specific information |
+| command | string | optional | Command to execute for this deployment. |
+| considerHealthyAfterRunningForSeconds | long | optional | Number of seconds that a service must be healthy to consider the deployment to be successful. |
+| timestamp | long | optional | Deploy timestamp. |
+| loadBalancerOptions | <a href="#Map[string,Object]">Map[string,Object]</a> | optional | Map (Key/Value) of options for the load balancer. |
+| customExecutorCmd | string | optional | Custom Mesos executor |
+| env | <a href="#Map[string,string]">Map[string,string]</a> | optional | Map of environment variable definitions. |
+| version | string | optional | Deploy version |
+| deployHealthTimeoutSeconds | long | optional | Number of seconds that singularity waits for this service to become healthy. |
+| id | string | required | Singularity deploy id. |
 
 
 <a name="#model-SingularityDeployRequest"></a>
 ## SingularityDeployRequest
 
-| type | required | description |
-|------|----------|-------------|
-| boolean | optional | If deploy is successful, also unpause the request. |
-| <a href="#SingularityDeploy">SingularityDeploy</a> | required | The Singularity deploy object |
-| string | optional | User owning this deploy. |
+| name | type | required | description |
+|------|------|----------|-------------|
+| unpauseOnSuccessfulDeploy | boolean | optional | If deploy is successful, also unpause the request. |
+| deploy | <a href="#SingularityDeploy">SingularityDeploy</a> | required | The Singularity deploy object |
+| user | string | optional | User owning this deploy. |
 
 
 <a name="#model-SingularityDockerInfo"></a>
 ## SingularityDockerInfo
 
-| type | required | description |
-|------|----------|-------------|
-| <a href="#Network">Network</a> | optional | - |
-| <a href="#SingularityDockerPortMapping">Array[SingularityDockerPortMapping]</a> | optional | - |
-| string | optional | - |
+| name | type | required | description |
+|------|------|----------|-------------|
+| network | <a href="#Network">Network</a> | optional | - |
+| portMappings | <a href="#SingularityDockerPortMapping">Array[SingularityDockerPortMapping]</a> | optional | - |
+| image | string | optional | - |
 
 
 <a name="#model-SingularityDockerPortMapping"></a>
 ## SingularityDockerPortMapping
 
-| type | required | description |
-|------|----------|-------------|
-| int | optional | - |
-| int | optional | - |
-| <a href="#SingularityPortMappingType">SingularityPortMappingType</a> | optional | - Allowable values: LITERAL, FROM_OFFER |
-| string | optional | - |
-| <a href="#SingularityPortMappingType">SingularityPortMappingType</a> | optional | - Allowable values: LITERAL, FROM_OFFER |
+| name | type | required | description |
+|------|------|----------|-------------|
+| hostPort | int | optional | - |
+| containerPort | int | optional | - |
+| containerPortType | <a href="#SingularityPortMappingType">SingularityPortMappingType</a> | optional | - Allowable values: LITERAL, FROM_OFFER |
+| protocol | string | optional | - |
+| hostPortType | <a href="#SingularityPortMappingType">SingularityPortMappingType</a> | optional | - Allowable values: LITERAL, FROM_OFFER |
 
 
 <a name="#model-SingularityRequest"></a>
 ## SingularityRequest
 
-| type | required | description |
-|------|----------|-------------|
-| string | optional | - |
-| Array[string] | optional | - |
-| boolean | optional | - |
-| <a href="#SlavePlacement">SlavePlacement</a> | optional | - |
-| boolean | optional | - |
-| Array[string] | optional | - |
-| string | optional | - |
-| int | optional | - |
-| boolean | optional | - |
-| long | optional | - |
-| int | optional | - |
-| <a href="#ScheduleType">ScheduleType</a> | optional | - |
-| string | optional | - |
+| name | type | required | description |
+|------|------|----------|-------------|
+| schedule | string | optional | - |
+| rackAffinity | Array[string] | optional | - |
+| daemon | boolean | optional | - |
+| slavePlacement | <a href="#SlavePlacement">SlavePlacement</a> | optional | - |
+| rackSensitive | boolean | optional | - |
+| owners | Array[string] | optional | - |
+| quartzSchedule | string | optional | - |
+| numRetriesOnFailure | int | optional | - |
+| loadBalanced | boolean | optional | - |
+| killOldNonLongRunningTasksAfterMillis | long | optional | - |
+| instances | int | optional | - |
+| scheduleType | <a href="#ScheduleType">ScheduleType</a> | optional | - |
+| id | string | optional | - |
 
 
 <a name="#model-SingularityRequestInstances"></a>
 ## SingularityRequestInstances
 
-| type | required | description |
-|------|----------|-------------|
-| int | optional | - |
-| string | optional | - |
+| name | type | required | description |
+|------|------|----------|-------------|
+| instances | int | optional | - |
+| id | string | optional | - |
 
 
 <a name="#model-SingularityVolume"></a>
 ## SingularityVolume
 
-| type | required | description |
-|------|----------|-------------|
-| string | optional | - |
-| string | optional | - |
-| <a href="#Mode">Mode</a> | optional | - Allowable values: RW, RO |
+| name | type | required | description |
+|------|------|----------|-------------|
+| hostPath | string | optional | - |
+| containerPath | string | optional | - |
+| mode | <a href="#Mode">Mode</a> | optional | - Allowable values: RW, RO |
 
 
 <a name="#model-SingularityWebhook"></a>
 ## SingularityWebhook
 
-| type | required | description |
-|------|----------|-------------|
-| <a href="#WebhookType">WebhookType</a> | optional | Webhook type. Allowable values: TASK, REQUEST, DEPLOY |
-| string | optional | URI to POST to. |
-| string | optional | User that created webhook. |
-| long | optional | - |
-| string | optional | Unique ID for webhook. |
+| name | type | required | description |
+|------|------|----------|-------------|
+| type | <a href="#WebhookType">WebhookType</a> | optional | Webhook type. Allowable values: TASK, REQUEST, DEPLOY |
+| uri | string | optional | URI to POST to. |
+| user | string | optional | User that created webhook. |
+| timestamp | long | optional | - |
+| id | string | optional | Unique ID for webhook. |
 
 
